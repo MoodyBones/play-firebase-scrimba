@@ -3,7 +3,8 @@ import { initializeApp } from "firebase/app"
 import {
     getAuth,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    signOut,
 } from "firebase/auth"
 
 
@@ -45,7 +46,7 @@ signOutButtonEl.addEventListener("click", authSignOut)
 
 /* === Main Code === */
 
-showLoggedInView()
+showLoggedOutView()
 
 /* === Functions === */
 
@@ -73,6 +74,7 @@ function authSignInWithEmail() {
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user
+            clearAuthFields()
             showLoggedInView()
         })
         .catch((error) => {
@@ -102,6 +104,7 @@ function authCreateAccountWithEmail() {
         .then((userCredential) => {
             // User created successfully
             const user = userCredential.user
+            clearAuthFields()
             showLoggedInView() // Show the logged in view
         })
         .catch((error) => {
@@ -110,7 +113,14 @@ function authCreateAccountWithEmail() {
 }
 
 function authSignOut() {
-    console.log("Sign out")
+    signOut(auth)
+        .then(() => {
+            clearAuthFields()
+            showLoggedOutView()
+        })
+        .catch((error) => {
+            console.error(error.message)
+        })
 }
 
 /* == Functions - UI Functions == */
@@ -131,4 +141,13 @@ function showElement(element) {
 
 function hideElement(element) {
     element.style.display = "none"
+}
+
+function clearInputField(field) {
+    field.value = ""
+}
+
+function clearAuthFields() {
+    clearInputField(emailInputEl)
+    clearInputField(passwordInputEl)
 }
