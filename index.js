@@ -32,6 +32,8 @@ const passwordInputEl = document.getElementById("password-input")
 const signInButtonEl = document.getElementById("sign-in-btn")
 const createAccountButtonEl = document.getElementById("create-account-btn")
 
+const signOutButtonEl = document.getElementById("sign-out-btn")
+
 /* == UI - Event Listeners == */
 
 signInWithGoogleButtonEl.addEventListener("click", authSignInWithGoogle)
@@ -39,9 +41,11 @@ signInWithGoogleButtonEl.addEventListener("click", authSignInWithGoogle)
 signInButtonEl.addEventListener("click", authSignInWithEmail)
 createAccountButtonEl.addEventListener("click", authCreateAccountWithEmail)
 
+signOutButtonEl.addEventListener("click", authSignOut)
+
 /* === Main Code === */
 
-showLoggedOutView()
+showLoggedInView()
 
 /* === Functions === */
 
@@ -103,6 +107,10 @@ function authCreateAccountWithEmail() {
         .catch((error) => {
             console.error(error.message) // Log the error
         })
+}
+
+function authSignOut() {
+    console.log("Sign out")
 }
 
 /* == Functions - UI Functions == */

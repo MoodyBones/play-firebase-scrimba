@@ -11,20 +11,21 @@
 
     --primary-font: 'Cabin', sans-serif;
     --seconday-font: 'Calistoga', sans-serif;
-    
+
     --border-width: 3px;
     --element-border-radius: 5px;
-    
+
     --button-height: 5px;
-    
+
     --small-button-height: 2px;
-    
+
     --element-padding: 0.8em;
-    
+
     --maximum-width: 320px;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     font-size: 16px;
@@ -60,6 +61,15 @@ section {
     gap: 1em;
 }
 
+/* === Nav === */
+
+nav {
+    margin: 0.6em 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 /* === Structure === */
 
 .container {
@@ -76,7 +86,8 @@ section {
 
 /* === Common for elements === */
 
-input, button {
+input,
+button {
     font-family: inherit;
     padding: var(--element-padding);
     border-radius: var(--element-border-radius);
@@ -87,7 +98,8 @@ input, button {
     border: var(--border-width) solid var(--dark-color);
 }
 
-input:focus, button:focus {
+input:focus,
+button:focus {
     outline: none;
 }
 
@@ -97,16 +109,20 @@ input {
     font-weight: 300;
 }
 
-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+input::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: var(--grey-color);
-    opacity: 1; /* Firefox */
+    opacity: 1;
+    /* Firefox */
 }
 
-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+input:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
     color: var(--grey-color);
 }
 
-input::-ms-input-placeholder { /* Microsoft Edge */
+input::-ms-input-placeholder {
+    /* Microsoft Edge */
     color: var(--grey-color);
 }
 
@@ -162,6 +178,18 @@ button:hover {
     width: 1.375em;
 }
 
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 1.875em;
+}
+
+.icon-img-btn:hover {
+    filter: invert(0.5);
+}
+
 /* === IDs === */
 
 #logged-out-view {
@@ -170,4 +198,5 @@ button:hover {
 
 #logged-in-view {
     display: none;
+    margin: 0;
 }
