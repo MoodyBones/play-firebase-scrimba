@@ -1,6 +1,7 @@
 /* === Imports === */
 import { initializeApp } from "firebase/app"
-import { getAuth } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+
 
 /* === Firebase Setup === */
 const firebaseConfig = {
@@ -51,7 +52,30 @@ function authSignInWithEmail() {
 }
 
 function authCreateAccountWithEmail() {
-    console.log("Sign up with email and password")
+    /*  Challenge:
+      Import the createUserWithEmailAndPassword function from 'firebase/auth'
+
+      Use the code from the documentaion to make this function work.
+      
+      Make sure to first create two consts, 'email' and 'password', to fetch the values from the input fields emailInputEl and passwordInputEl.
+     
+      If the creation of user is successful then you should show the logged in view using showLoggedInView()
+      If something went wrong, then you should log the error message using console.error.
+  */
+    const email = emailInputEl.value
+    const password = passwordInputEl.value
+
+    // const auth = getAuth() // removed because we already have it from the top
+
+    createUserWithEmailAndPassword(auth, email, password) // function that returns a promise
+        .then((userCredential) => {
+            // User created successfully
+            const user = userCredential.user
+            showLoggedInView() // Show the logged in view
+        })
+        .catch((error) => {
+            console.error(error.message) // Log the error
+        })
 }
 
 /* == Functions - UI Functions == */
