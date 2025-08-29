@@ -126,21 +126,21 @@ function authSignOut() {
 /* == Functions - UI Functions == */
 
 function showLoggedOutView() {
-    hideElement(viewLoggedIn)
-    showElement(viewLoggedOut)
+    hideView(viewLoggedIn)
+    showView(viewLoggedOut)
 }
 
 function showLoggedInView() {
-    hideElement(viewLoggedOut)
-    showElement(viewLoggedIn)
+    hideView(viewLoggedOut)
+    showView(viewLoggedIn)
 }
 
-function showElement(element) {
-    element.style.display = "flex"
+function showView(view) {
+    view.style.display = "flex"
 }
 
-function hideElement(element) {
-    element.style.display = "none"
+function hideView(view) {
+    view.style.display = "none"
 }
 
 function clearInputField(field) {
