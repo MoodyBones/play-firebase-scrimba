@@ -8,6 +8,7 @@ import {
     onAuthStateChanged,
     GoogleAuthProvider,
     signInWithPopup,
+    updateProfile,
 } from "firebase/auth"
 
 
@@ -42,6 +43,10 @@ const signOutButtonEl = document.getElementById("sign-out-btn")
 const userProfilePictureEl = document.getElementById("user-profile-picture")
 const userGreetingEl = document.getElementById("user-greeting")
 
+const displayNameInputEl = document.getElementById("display-name-input")
+const photoURLInputEl = document.getElementById("photo-url-input")
+const updateProfileButtonEl = document.getElementById("update-profile-btn")
+
 /* == UI - Event Listeners == */
 
 signInWithGoogleButtonEl.addEventListener("click", authSignInWithGoogle)
@@ -50,6 +55,8 @@ signInButtonEl.addEventListener("click", authSignInWithEmail)
 createAccountButtonEl.addEventListener("click", authCreateAccountWithEmail)
 
 signOutButtonEl.addEventListener("click", authSignOut)
+
+updateProfileButtonEl.addEventListener("click", authUpdateProfile)
 
 /* === Main Code === */
 
@@ -161,6 +168,35 @@ function authSignOut() {
     signOut(auth)
         .then(() => {
             clearAuthFields()
+        })
+        .catch((error) => {
+            console.error(error.message)
+        })
+}
+
+function authUpdateProfile() {
+    /*  Challenge:
+        Import the updateProfile function from 'firebase/auth'
+    
+        Use the documentation to make this function work.
+        
+        Make sure to first create two consts, 'newDisplayName' and 'newPhotoURL', to fetch the values from the input fields displayNameInputEl and photoURLInputEl.
+        
+        If the updating of profile is successful then you should console log "Profile updated".
+        If something went wrong, then you should log the error message using console.error
+        
+        Resources:
+        Justin Bieber profile picture URL: https://i.imgur.com/6GYlSed.jpg
+    */
+    const newDisplayName = displayNameInputEl.value
+    const newPhotoURL = photoURLInputEl.value
+
+    updateProfile(auth.currentUser, {
+        displayName: newDisplayName,
+        photoURL: newPhotoURL
+    })
+        .then(() => {
+            console.log("Profile updated")
         })
         .catch((error) => {
             console.error(error.message)
