@@ -6,6 +6,8 @@ import {
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged,
+    GoogleAuthProvider,
+    signInWithPopup,
 } from "firebase/auth"
 
 
@@ -18,6 +20,7 @@ const firebaseConfig = {
 }
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
+const provider = new GoogleAuthProvider()
 
 /* === UI === */
 
@@ -73,7 +76,26 @@ onAuthStateChanged(auth, (user) => {
 /* = Functions - Firebase - Authentication = */
 
 function authSignInWithGoogle() {
-    console.log("Sign in with Google")
+    /*  Challenge:
+        Import the signInWithPopup function from 'firebase/auth'
+
+        Use the code from the documentaion to make this function work.
+       
+        If the login is successful then you should console log "Signed in with Google"
+        If something went wrong, then you should log the error message using console.error.
+    */
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            // This gives you a Google Access Token
+            const credential = GoogleAuthProvider.credentialFromResult(result)
+            const token = credential.accessToken
+            // The signed-in user info
+            const user = result.user
+            console.log("Signed in with Google")
+        })
+        .catch((error) => {
+            console.error(error.message)
+        })
 }
 
 function authSignInWithEmail() {
