@@ -1,5 +1,7 @@
 /* === Imports === */
 import { initializeApp } from "firebase/app"
+import { getAuth } from "firebase/auth"
+
 /* === Firebase Setup === */
 const firebaseConfig = {
     apiKey: "AIzaSyChTRTrtyLa_cyCnR6hsS4cP5UpbHoM4gs",
@@ -7,8 +9,9 @@ const firebaseConfig = {
     projectId: "moody-scrim",
     storageBucket: "moody-scrim.firebasestorage.app",
 }
-
 const app = initializeApp(firebaseConfig)
+const auth = getAuth(app)
+
 /* === UI === */
 
 /* == UI - Elements == */
