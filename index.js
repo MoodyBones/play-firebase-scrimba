@@ -40,6 +40,7 @@ const createAccountButtonEl = document.getElementById("create-account-btn")
 const signOutButtonEl = document.getElementById("sign-out-btn")
 
 const userProfilePictureEl = document.getElementById("user-profile-picture")
+const userGreetingEl = document.getElementById("user-greeting")
 
 /* == UI - Event Listeners == */
 
@@ -68,7 +69,7 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         showLoggedInView()
         showProfilePicture(userProfilePictureEl, user)
-
+        showUserGreeting(userGreetingEl, user)
     } else {
         showLoggedOutView()
     }
@@ -216,4 +217,33 @@ function showProfilePicture(imgElement, user) {
     } else {
         imgElement.src = "assets/images/default-profile-picture.jpeg"
     }
+}
+
+function showUserGreeting(element, user) {
+    /*  Challenge:
+        Use the documentation to make this function work.
+        
+        This function has two parameters: element and user
+        
+        We will call this function inside of onAuthStateChanged when the user is logged in.
+        
+        The function will be called with the following arguments:
+        showUserGreeting(userGreetingEl, user)
+        
+        If the user has a display name, then set the textContent of element to:
+        "Hey John, how are you?"
+        Where John is replaced with the actual first name of the user
+        
+        Otherwise, set the textContent of element to:
+        "Hey friend, how are you?" 
+    */
+    const displayName = user.displayName
+
+    if (displayName) {
+        const userFirstName = displayName.split(" ")[0]
+        element.textContent = `Hey ${userFirstName}, how are you?`
+    } else {
+        element.textContent = "Hey friend, how are you?"
+    }
+
 }
