@@ -5,6 +5,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
+    onAuthStateChanged,
 } from "firebase/auth"
 
 
@@ -46,7 +47,26 @@ signOutButtonEl.addEventListener("click", authSignOut)
 
 /* === Main Code === */
 
-showLoggedOutView()
+/*  Challenge:
+    Import the onAuthStateChanged function from 'firebase/auth'
+
+    Use the code from the documentaion to make this work.
+    
+    Use onAuthStateChanged to:
+    
+    Show the logged in view when the user is logged in using showLoggedInView()
+    
+    Show the logged out view when the user is logged out using showLoggedOutView()
+*/
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        showLoggedInView()
+    } else {
+        showLoggedOutView()
+    }
+})
+
 
 /* === Functions === */
 
@@ -75,7 +95,6 @@ function authSignInWithEmail() {
             // Signed in 
             const user = userCredential.user
             clearAuthFields()
-            showLoggedInView()
         })
         .catch((error) => {
             const errorCode = error.code
@@ -92,7 +111,7 @@ function authCreateAccountWithEmail() {
       
       Make sure to first create two consts, 'email' and 'password', to fetch the values from the input fields emailInputEl and passwordInputEl.
      
-      If the creation of user is successful then you should show the logged in view using showLoggedInView()
+      If the creation of user is successful then you should show the logged in view using 
       If something went wrong, then you should log the error message using console.error.
   */
     const email = emailInputEl.value
@@ -105,7 +124,6 @@ function authCreateAccountWithEmail() {
             // User created successfully
             const user = userCredential.user
             clearAuthFields()
-            showLoggedInView() // Show the logged in view
         })
         .catch((error) => {
             console.error(error.message) // Log the error
@@ -116,7 +134,6 @@ function authSignOut() {
     signOut(auth)
         .then(() => {
             clearAuthFields()
-            showLoggedOutView()
         })
         .catch((error) => {
             console.error(error.message)
